@@ -1,0 +1,85 @@
+services:
+  # ---------- BANCO DE DADOS ----------
+  postgres:
+    image: postgres:16-alpine
+    container_name: hortifruti_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - db_net          # só conversa com a API
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # ---------- CACHE / CONTROLE DA API ----------
+  redis:
+    image: redis:7-alpine
+    container_name: hortifruti_cache
+    restart: unless-stopped
+    command: ["redis-server", "--requirepass", "${REDIS_PASSWORD}"]
+    volumes:
+      - redis_data:/data
+    networks:
+      - cache_net       # só conversa com a API
+    healthcheck:
+      test: ["CMD", "redis-cli", "-a", "${REDIS_PASSWORD}", "--no-auth-warning", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # ---------- API ----------
+  api:
+    build: ./backend
+    container_name: hortifruti_api
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy   # só sobe quando o banco estiver pronto
+      redis:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}?schema=public
+      REDIS_URL: redis://:${REDIS_PASSWORD}@redis:6379
+      JWT_SECRET: ${JWT_SECRET}
+      MP_ACCESS_TOKEN: ${MP_ACCESS_TOKEN}
+      MP_WEBHOOK_SECRET: ${MP_WEBHOOK_SECRET}
+      API_URL: ${API_URL}
+      FRONTEND_URL: ${FRONTEND_URL}
+    ports:
+      - "3333:3333"     # ÚNICO serviço exposto pro mundo
+    networks:
+      - web_net         # acesso externo
+      - db_net          # fala com o postgres
+      - cache_net       # fala com o redis
+    volumes:
+      - ./backend:/usr/src/app
+      - /usr/src/app/node_modules   # protege o node_modules do container
+      # ATENÇÃO: esse é um volume anônimo — o Compose o REUTILIZA entre
+      # execuções de `up`, mesmo depois de `--build`. Se mudar package.json
+      # (ou não estiver refletindo o código novo), rode:
+      #   docker compose up -d --build --force-recreate -V
+      # a flag -V (--renew-anon-volumes) força esse volume a ser recriado
+      # a partir da imagem nova.
+
+# ---------- REDES ----------
+networks:
+  web_net:
+    driver: bridge
+  db_net:
+    driver: bridge
+    internal: true      # sem rota pra internet
+  cache_net:
+    driver: bridge
+    internal: true      # sem rota pra internet
+
+# ---------- VOLUMES (dados persistem entre restarts) ----------
+volumes:
+  postgres_data:
+  redis_data:
