@@ -91,7 +91,7 @@ export default function Logo({ variant = 'full', className = '' }: LogoProps) {
             <span style={{ color: DARK }}>Feira</span>
             <span style={{ color: RED }}>Etec</span>
           </div>
-          <div className="text-[9px] font-semibold tracking-wide text-gray-400 -mt-0.5">
+          <div className="text-[9px] font-semibold tracking-wide text-ink-400 -mt-0.5">
             UNIDADE RURAL
           </div>
         </div>

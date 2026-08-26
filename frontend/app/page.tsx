@@ -85,7 +85,7 @@ function HomeContent() {
 
         <main className="flex-1 min-w-0 py-6 lg:py-8 flex flex-col gap-8">
           {error && (
-            <div className="flex items-center gap-2 p-3 rounded-input bg-red-50 border border-red-200 text-red-600 text-sm">
+            <div className="flex items-center gap-2 p-3 rounded-input bg-brand-red/10 border border-brand-red/25 text-brand-red text-sm">
               <AlertTriangle className="w-4 h-4 shrink-0" />
               {error}
             </div>
@@ -102,7 +102,7 @@ function HomeContent() {
 
           <section>
             <div className="flex items-center justify-between mb-4">
-              <h2 className="font-bold text-lg text-gray-800">{sectionTitle}</h2>
+              <h2 className="font-bold text-lg text-ink-800">{sectionTitle}</h2>
               {!debouncedSearch && (
                 <a href="/categorias" className="text-horta-dark text-sm font-medium hover:underline">
                   Ver todas
@@ -115,7 +115,7 @@ function HomeContent() {
                 [...Array(5)].map((_, i) => <ProductCardSkeleton key={i} />)}
 
               {!produtosLoading && produtosExibidos.length === 0 && (
-                <p className="col-span-full text-sm text-gray-400">
+                <p className="col-span-full text-sm text-ink-400">
                   Nenhum produto encontrado{debouncedSearch ? ` para "${debouncedSearch}"` : ''}.
                 </p>
               )}

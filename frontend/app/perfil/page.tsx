@@ -24,7 +24,7 @@ export default function PerfilPage() {
   return (
     <AppShell title="Meu perfil">
       {error && (
-        <div className="flex items-center gap-2 p-3 rounded-input bg-red-50 border border-red-200 text-red-600 text-sm">
+        <div className="flex items-center gap-2 p-3 rounded-input bg-brand-red/10 border border-brand-red/25 text-brand-red text-sm">
           <AlertTriangle className="w-4 h-4 shrink-0" />
           {error}
         </div>
@@ -32,8 +32,8 @@ export default function PerfilPage() {
 
       {loading && (
         <div className="bg-white rounded-card border border-card-border shadow-card p-6 space-y-3 max-w-md">
-          <div className="h-5 w-40 bg-gray-100 rounded animate-pulse" />
-          <div className="h-4 w-56 bg-gray-100 rounded animate-pulse" />
+          <div className="h-5 w-40 bg-ink-100 rounded animate-pulse" />
+          <div className="h-4 w-56 bg-ink-100 rounded animate-pulse" />
         </div>
       )}
 
@@ -44,7 +44,7 @@ export default function PerfilPage() {
               {usuario.nome.charAt(0).toUpperCase()}
             </div>
             <div>
-              <h2 className="font-bold text-gray-800">{usuario.nome}</h2>
+              <h2 className="font-bold text-ink-800">{usuario.nome}</h2>
               <span className="inline-flex items-center gap-1 text-xs text-horta-medium font-medium mt-0.5">
                 <ShieldCheck className="w-3.5 h-3.5" />
                 {usuario.tipo === 'ADM' ? 'Administrador' : 'Cliente'}
@@ -52,15 +52,15 @@ export default function PerfilPage() {
             </div>
           </div>
 
-          <div className="flex items-center gap-2 mt-5 text-sm text-gray-600">
-            <Mail className="w-4 h-4 text-gray-400" />
+          <div className="flex items-center gap-2 mt-5 text-sm text-ink-600">
+            <Mail className="w-4 h-4 text-ink-400" />
             {usuario.email}
           </div>
 
           <button
             type="button"
             onClick={signOut}
-            className="w-full h-12 mt-6 rounded-input border border-red-200 text-brand-red font-semibold text-sm flex items-center justify-center gap-2 hover:bg-red-50 transition-colors"
+            className="w-full h-12 mt-6 rounded-input border border-brand-red/25 text-brand-red font-semibold text-sm flex items-center justify-center gap-2 hover:bg-brand-red/10 transition-colors"
           >
             <LogOut className="w-4 h-4" />
             Sair da conta

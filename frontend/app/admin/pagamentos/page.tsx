@@ -112,23 +112,23 @@ export default function PagamentosPendentesPage() {
       <h1 className="text-xl font-bold mb-6">Pagamentos aguardando confirmação</h1>
 
       {pedidos.length === 0 && (
-        <p className="text-gray-500">Nenhum pagamento pendente no momento.</p>
+        <p className="text-ink-500">Nenhum pagamento pendente no momento.</p>
       )}
 
       <div className="space-y-4">
         {pedidos.map((pedido) => (
-          <div key={pedido.id} className="border rounded-lg p-4 shadow-sm">
+          <div key={pedido.id} className="bg-white border border-card-border rounded-card p-4 shadow-card">
             <div className="flex justify-between items-start mb-3">
               <div>
                 <p className="font-medium">{pedido.usuario.nome}</p>
-                <p className="text-sm text-gray-500">{pedido.usuario.email}</p>
+                <p className="text-sm text-ink-500">{pedido.usuario.email}</p>
               </div>
               <p className="font-bold text-lg">
                 R$ {Number(pedido.total).toFixed(2)}
               </p>
             </div>
 
-            <p className="text-sm text-gray-500 mb-3">
+            <p className="text-sm text-ink-500 mb-3">
               Comprovante enviado em:{' '}
               {new Date(pedido.comprovante_enviado_em).toLocaleString('pt-BR')}
             </p>
@@ -153,7 +153,7 @@ export default function PagamentosPendentesPage() {
               <button
                 onClick={() => rejeitar(pedido.id)}
                 disabled={processandoId === pedido.id}
-                className="flex-1 bg-red-600 text-white py-2 rounded disabled:opacity-50"
+                className="flex-1 bg-brand-red text-white py-2 rounded disabled:opacity-50"
               >
                 {processandoId === pedido.id ? 'Processando...' : 'Rejeitar'}
               </button>

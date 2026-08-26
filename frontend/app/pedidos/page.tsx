@@ -17,18 +17,18 @@ const STATUS_LABEL: Record<StatusCompra, string> = {
 }
 
 const STATUS_COLOR: Record<StatusCompra, string> = {
-  CARRINHO: 'bg-gray-100 text-gray-600',
+  CARRINHO: 'bg-ink-100 text-ink-600',
   AGUARDANDO_PAGAMENTO: 'bg-brand-yellow/20 text-yellow-700',
   FINALIZADA: 'bg-horta-medium/15 text-horta-dark',
-  CANCELADA: 'bg-red-50 text-brand-red',
+  CANCELADA: 'bg-brand-red/10 text-brand-red',
   ENTREGUE: 'bg-horta-medium/15 text-horta-dark',
 }
 
 function PedidoSkeleton() {
   return (
     <div className="bg-white rounded-card border border-card-border shadow-card p-4 space-y-3">
-      <div className="h-4 w-32 bg-gray-100 rounded animate-pulse" />
-      <div className="h-3 w-48 bg-gray-100 rounded animate-pulse" />
+      <div className="h-4 w-32 bg-ink-100 rounded animate-pulse" />
+      <div className="h-3 w-48 bg-ink-100 rounded animate-pulse" />
     </div>
   )
 }
@@ -49,7 +49,7 @@ export default function PedidosPage() {
   return (
     <AppShell title="Meus pedidos">
       {error && (
-        <div className="flex items-center gap-2 p-3 rounded-input bg-red-50 border border-red-200 text-red-600 text-sm">
+        <div className="flex items-center gap-2 p-3 rounded-input bg-brand-red/10 border border-brand-red/25 text-brand-red text-sm">
           <AlertTriangle className="w-4 h-4 shrink-0" />
           {error}
         </div>
@@ -65,8 +65,8 @@ export default function PedidosPage() {
 
       {!loading && pedidos.length === 0 && !error && (
         <div className="flex flex-col items-center justify-center gap-3 py-16 text-center">
-          <PackageOpen className="w-10 h-10 text-gray-300" />
-          <p className="text-gray-400 text-sm">Você ainda não fez nenhum pedido.</p>
+          <PackageOpen className="w-10 h-10 text-ink-300" />
+          <p className="text-ink-400 text-sm">Você ainda não fez nenhum pedido.</p>
         </div>
       )}
 
@@ -74,7 +74,7 @@ export default function PedidosPage() {
         {pedidos.map((pedido) => (
           <div key={pedido.id} className="bg-white rounded-card border border-card-border shadow-card p-4">
             <div className="flex items-center justify-between">
-              <span className="text-xs text-gray-400">
+              <span className="text-xs text-ink-400">
                 {new Date(pedido.criado_em).toLocaleDateString('pt-BR')}
               </span>
               <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${STATUS_COLOR[pedido.status]}`}>
@@ -93,7 +93,7 @@ export default function PedidosPage() {
             </div>
 
             <div className="flex items-center justify-between mt-3">
-              <span className="text-sm text-gray-500">{pedido.itens.length} item(ns)</span>
+              <span className="text-sm text-ink-500">{pedido.itens.length} item(ns)</span>
               <span className="font-bold text-horta-dark">{formatPrice(pedido.total)}</span>
             </div>
           </div>

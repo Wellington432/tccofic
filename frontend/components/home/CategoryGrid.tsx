@@ -23,8 +23,8 @@ interface CategoryGridProps {
 function CardSkeleton() {
   return (
     <div className="flex flex-col items-center gap-2">
-      <div className="w-full aspect-square rounded-card bg-gray-100 animate-pulse" />
-      <div className="h-3 w-14 rounded bg-gray-100 animate-pulse" />
+      <div className="w-full aspect-square rounded-card bg-ink-100 animate-pulse" />
+      <div className="h-3 w-14 rounded bg-ink-100 animate-pulse" />
     </div>
   )
 }
@@ -33,7 +33,7 @@ export default function CategoryGrid({ categorias, loading, activeId, onSelect }
   return (
     <section>
       <div className="flex items-center justify-between mb-4">
-        <h2 className="font-bold text-lg text-gray-800">Categorias</h2>
+        <h2 className="font-bold text-lg text-ink-800">Categorias</h2>
         <Link href="/categorias" className="text-horta-dark text-sm font-medium hover:underline">
           Ver todas
         </Link>
@@ -44,7 +44,7 @@ export default function CategoryGrid({ categorias, loading, activeId, onSelect }
           [...Array(5)].map((_, i) => <CardSkeleton key={i} />)}
 
         {!loading && categorias.length === 0 && (
-          <p className="col-span-full text-sm text-gray-400">Nenhuma categoria cadastrada ainda.</p>
+          <p className="col-span-full text-sm text-ink-400">Nenhuma categoria cadastrada ainda.</p>
         )}
 
         {!loading &&
@@ -56,7 +56,8 @@ export default function CategoryGrid({ categorias, loading, activeId, onSelect }
                 key={categoria.id}
                 type="button"
                 onClick={() => onSelect(active ? undefined : categoria.id)}
-                className={`flex flex-col items-center gap-2 group`}
+                className="flex flex-col items-center gap-2 group animate-rise-in"
+                style={{ animationDelay: `${categorias.indexOf(categoria) * 50}ms` }}
               >
                 <div
                   className={`w-full aspect-square rounded-card bg-white border flex items-center justify-center shadow-card transition-colors ${
@@ -67,7 +68,7 @@ export default function CategoryGrid({ categorias, loading, activeId, onSelect }
                 </div>
                 <span
                   className={`text-xs font-medium text-center leading-tight ${
-                    active ? 'text-horta-dark' : 'text-gray-600'
+                    active ? 'text-horta-dark' : 'text-ink-600'
                   }`}
                 >
                   {categoria.nome}

@@ -14,7 +14,7 @@ export default function FormInput({ icon: Icon, rightElement, className = '', ..
       <Icon className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-horta-medium pointer-events-none" />
       <input
         {...props}
-        className={`w-full h-14 rounded-input border border-input-border bg-white pl-12 pr-12 text-[15px] text-gray-800 placeholder:text-gray-400 outline-none focus:border-horta-medium focus:ring-2 focus:ring-horta-medium/15 transition-colors ${className}`}
+        className={`w-full h-14 rounded-input border border-input-border bg-white pl-12 pr-12 text-[15px] text-ink-800 placeholder:text-ink-400 outline-none focus:border-horta-medium focus:ring-2 focus:ring-horta-medium/15 transition-colors ${className}`}
       />
       {rightElement && (
         <div className="absolute right-4 top-1/2 -translate-y-1/2">{rightElement}</div>

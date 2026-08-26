@@ -24,7 +24,7 @@ export default function Sidebar() {
 
   return (
     <aside className="hidden lg:flex flex-col w-64 shrink-0 gap-6 py-8 pr-6">
-      <nav className="bg-white rounded-card border border-card-border shadow-card p-3 flex flex-col gap-1">
+      <nav className="bg-white rounded-card border border-card-border p-3 flex flex-col gap-1">
         {navItems.map(({ href, label, icon: Icon }) => {
           const active = pathname === href
           return (
@@ -34,7 +34,7 @@ export default function Sidebar() {
               className={`flex items-center gap-3 px-4 py-3 rounded-input text-sm font-medium transition-colors ${
                 active
                   ? 'bg-horta-medium/10 text-horta-dark'
-                  : 'text-gray-500 hover:bg-bg-app'
+                  : 'text-ink-500 hover:bg-bg-app'
               }`}
             >
               <Icon className="w-[18px] h-[18px]" />

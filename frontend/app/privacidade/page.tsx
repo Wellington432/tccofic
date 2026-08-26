@@ -1,5 +1,6 @@
 import Link from 'next/link'
-import { ArrowLeft } from 'lucide-react'
+import { ArrowLeft, ShieldCheck } from 'lucide-react'
+import StaticPageHero from '@/components/StaticPageHero'
 
 export default function PrivacidadePage() {
   return (
@@ -9,13 +10,15 @@ export default function PrivacidadePage() {
           <ArrowLeft className="w-4 h-4" />
           Voltar
         </Link>
-        <h1 className="text-2xl font-bold text-horta-dark mb-4">Política de Privacidade</h1>
-        <p className="text-gray-600 leading-relaxed">
-          Seus dados (nome, e-mail e senha criptografada) são usados exclusivamente
-          para autenticação e processamento dos seus pedidos junto à Unidade Rural
-          da ETEC Jales. Não compartilhamos suas informações com terceiros, exceto
-          o processador de pagamentos utilizado no checkout.
-        </p>
+
+        <StaticPageHero icon={ShieldCheck} title="Política de Privacidade">
+          <p className="text-ink-600 leading-relaxed">
+            Seus dados (nome, e-mail e senha criptografada) são usados exclusivamente
+            para autenticação e processamento dos seus pedidos junto à Unidade Rural
+            da ETEC Jales. Não compartilhamos suas informações com terceiros, exceto
+            o processador de pagamentos utilizado no checkout.
+          </p>
+        </StaticPageHero>
       </div>
     </div>
   )

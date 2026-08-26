@@ -50,7 +50,7 @@ export default function AdminCategoriasPage() {
   return (
     <AdminShell title="Categorias">
       {error && (
-        <div className="flex items-center gap-2 p-3 rounded-input bg-red-50 border border-red-200 text-red-600 text-sm">
+        <div className="flex items-center gap-2 p-3 rounded-input bg-brand-red/10 border border-brand-red/25 text-brand-red text-sm">
           <AlertTriangle className="w-4 h-4 shrink-0" />
           {error}
         </div>
@@ -58,7 +58,7 @@ export default function AdminCategoriasPage() {
 
       <form onSubmit={handleSubmit} className="bg-white rounded-card border border-card-border shadow-card p-5 flex items-end gap-3 max-w-lg">
         <div className="flex-1">
-          <label className="block text-xs font-medium text-gray-500 mb-1">Nova categoria</label>
+          <label className="block text-xs font-medium text-ink-500 mb-1">Nova categoria</label>
           <input
             value={nome}
             onChange={(e) => setNome(e.target.value)}
@@ -83,8 +83,8 @@ export default function AdminCategoriasPage() {
 
       {!loading && categorias.length === 0 && (
         <div className="flex flex-col items-center justify-center gap-3 py-16 text-center">
-          <FolderTree className="w-10 h-10 text-gray-300" />
-          <p className="text-gray-400 text-sm">Nenhuma categoria cadastrada ainda.</p>
+          <FolderTree className="w-10 h-10 text-ink-300" />
+          <p className="text-ink-400 text-sm">Nenhuma categoria cadastrada ainda.</p>
         </div>
       )}
 
@@ -93,7 +93,7 @@ export default function AdminCategoriasPage() {
           {categorias.map((categoria) => (
             <div key={categoria.id} className="px-4 py-3 flex items-center gap-3">
               <FolderTree className="w-4 h-4 text-horta-medium shrink-0" />
-              <span className="text-sm text-gray-700">{categoria.nome}</span>
+              <span className="text-sm text-ink-700">{categoria.nome}</span>
             </div>
           ))}
         </div>

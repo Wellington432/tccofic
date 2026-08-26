@@ -78,7 +78,7 @@ export default function AdminProdutosPage() {
   return (
     <AdminShell title="Produtos">
       {error && (
-        <div className="flex items-center gap-2 p-3 rounded-input bg-red-50 border border-red-200 text-red-600 text-sm">
+        <div className="flex items-center gap-2 p-3 rounded-input bg-brand-red/10 border border-brand-red/25 text-brand-red text-sm">
           <AlertTriangle className="w-4 h-4 shrink-0" />
           {error}
         </div>
@@ -112,8 +112,8 @@ export default function AdminProdutosPage() {
 
       {!loading && produtos.length === 0 && (
         <div className="flex flex-col items-center justify-center gap-3 py-16 text-center">
-          <Package className="w-10 h-10 text-gray-300" />
-          <p className="text-gray-400 text-sm">Nenhum produto cadastrado ainda.</p>
+          <Package className="w-10 h-10 text-ink-300" />
+          <p className="text-ink-400 text-sm">Nenhum produto cadastrado ainda.</p>
         </div>
       )}
 
@@ -122,7 +122,7 @@ export default function AdminProdutosPage() {
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr className="text-left text-gray-400 text-xs border-b border-card-border">
+                <tr className="text-left text-ink-400 text-xs border-b border-card-border">
                   <th className="font-medium px-4 py-3">Produto</th>
                   <th className="font-medium px-4 py-3">Categoria</th>
                   <th className="font-medium px-4 py-3 text-right">Preço</th>
@@ -141,19 +141,19 @@ export default function AdminProdutosPage() {
                           )}
                         </div>
                         <div>
-                          <p className="font-medium text-gray-800">{produto.nome}</p>
-                          <p className="text-xs text-gray-400">{produto.unidade}</p>
+                          <p className="font-medium text-ink-800">{produto.nome}</p>
+                          <p className="text-xs text-ink-400">{produto.unidade}</p>
                         </div>
                       </div>
                     </td>
-                    <td className="px-4 py-3 text-gray-600">{produto.categoria?.nome ?? '—'}</td>
+                    <td className="px-4 py-3 text-ink-600">{produto.categoria?.nome ?? '—'}</td>
                     <td className="px-4 py-3 text-right font-medium text-horta-dark">
                       {formatPrice(produto.preco)}
                     </td>
                     <td className="px-4 py-3 text-right">
                       <span
                         className={`font-medium tabular-nums ${
-                          produto.estoque <= ESTOQUE_BAIXO_LIMIAR ? 'text-[#d03b3b]' : 'text-gray-700'
+                          produto.estoque <= ESTOQUE_BAIXO_LIMIAR ? 'text-[#d03b3b]' : 'text-ink-700'
                         }`}
                       >
                         {produto.estoque}
@@ -164,7 +164,7 @@ export default function AdminProdutosPage() {
                         <button
                           type="button"
                           onClick={() => abrirEdicao(produto)}
-                          className="w-8 h-8 rounded-full flex items-center justify-center text-gray-500 hover:bg-bg-app transition-colors"
+                          className="w-8 h-8 rounded-full flex items-center justify-center text-ink-500 hover:bg-bg-app transition-colors"
                           aria-label={`Editar ${produto.nome}`}
                         >
                           <Pencil className="w-4 h-4" />
@@ -173,7 +173,7 @@ export default function AdminProdutosPage() {
                           type="button"
                           onClick={() => handleDelete(produto.id)}
                           disabled={deletingId === produto.id}
-                          className="w-8 h-8 rounded-full flex items-center justify-center text-brand-red hover:bg-red-50 transition-colors disabled:opacity-50"
+                          className="w-8 h-8 rounded-full flex items-center justify-center text-brand-red hover:bg-brand-red/10 transition-colors disabled:opacity-50"
                           aria-label={`Excluir ${produto.nome}`}
                         >
                           <Trash2 className="w-4 h-4" />

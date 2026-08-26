@@ -92,11 +92,11 @@ export default function LineChart({ title, data, valueFormatter = (v) => String(
   return (
     <div className="bg-white rounded-card border border-card-border shadow-card p-5">
       <div className="flex items-center justify-between mb-3">
-        <h3 className="font-semibold text-gray-800 text-sm">{title}</h3>
+        <h3 className="font-semibold text-ink-800 text-sm">{title}</h3>
         <button
           type="button"
           onClick={() => setShowTable((v) => !v)}
-          className="flex items-center gap-1.5 text-xs text-gray-400 hover:text-horta-dark transition-colors"
+          className="flex items-center gap-1.5 text-xs text-ink-400 hover:text-horta-dark transition-colors"
           aria-pressed={showTable}
         >
           <Table2 className="w-3.5 h-3.5" />
@@ -118,7 +118,7 @@ export default function LineChart({ title, data, valueFormatter = (v) => String(
             {gridLines.map((g) => (
               <g key={g.value}>
                 <line x1={PAD_LEFT} x2={WIDTH - PAD_RIGHT} y1={g.y} y2={g.y} stroke={GRID} strokeWidth={1} />
-                <text x={PAD_LEFT - 8} y={g.y + 3} textAnchor="end" className="fill-gray-400" fontSize={10}>
+                <text x={PAD_LEFT - 8} y={g.y + 3} textAnchor="end" className="fill-ink-400" fontSize={10}>
                   {valueFormatter(g.value)}
                 </text>
               </g>
@@ -130,7 +130,7 @@ export default function LineChart({ title, data, valueFormatter = (v) => String(
                 x={points[i].x}
                 y={HEIGHT - 8}
                 textAnchor="middle"
-                className="fill-gray-400"
+                className="fill-ink-400"
                 fontSize={10}
               >
                 {formatDateLabel(points[i].data)}
@@ -159,7 +159,7 @@ export default function LineChart({ title, data, valueFormatter = (v) => String(
 
           {hovered && (
             <div
-              className="absolute z-10 px-2.5 py-1.5 rounded-md bg-gray-900 text-white text-xs whitespace-nowrap shadow-lg pointer-events-none -translate-x-1/2"
+              className="absolute z-10 px-2.5 py-1.5 rounded-md bg-ink-900 text-white text-xs whitespace-nowrap shadow-card-lg pointer-events-none -translate-x-1/2"
               style={{
                 left: `${(hovered.x / WIDTH) * 100}%`,
                 top: `${Math.max(0, (hovered.y / HEIGHT) * 100 - 14)}%`,
@@ -177,7 +177,7 @@ export default function LineChart({ title, data, valueFormatter = (v) => String(
         <div className="overflow-x-auto max-h-64 overflow-y-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="text-left text-gray-400 text-xs sticky top-0 bg-white">
+              <tr className="text-left text-ink-400 text-xs sticky top-0 bg-white">
                 <th className="font-medium pb-2">Data</th>
                 <th className="font-medium pb-2 text-right">Receita</th>
               </tr>
@@ -185,8 +185,8 @@ export default function LineChart({ title, data, valueFormatter = (v) => String(
             <tbody>
               {data.map((d) => (
                 <tr key={d.data} className="border-t border-card-border">
-                  <td className="py-2 text-gray-700">{formatDateLabel(d.data)}</td>
-                  <td className="py-2 text-right tabular-nums text-gray-700">{valueFormatter(d.total)}</td>
+                  <td className="py-2 text-ink-700">{formatDateLabel(d.data)}</td>
+                  <td className="py-2 text-right tabular-nums text-ink-700">{valueFormatter(d.total)}</td>
                 </tr>
               ))}
             </tbody>

@@ -69,18 +69,18 @@ export default function ProdutoFormModal({ categorias, produto, onClose, onSaved
       >
         <div className="flex items-center justify-between mb-5">
           <h2 className="font-bold text-lg text-horta-dark">{isEdit ? 'Editar produto' : 'Novo produto'}</h2>
-          <button type="button" onClick={onClose} aria-label="Fechar" className="text-gray-400 hover:text-gray-600">
+          <button type="button" onClick={onClose} aria-label="Fechar" className="text-ink-400 hover:text-ink-600">
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {error && (
-          <div className="mb-4 p-3 rounded-input bg-red-50 border border-red-200 text-red-600 text-sm">{error}</div>
+          <div className="mb-4 p-3 rounded-input bg-brand-red/10 border border-brand-red/25 text-brand-red text-sm">{error}</div>
         )}
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-xs font-medium text-gray-500 mb-1">Nome</label>
+            <label className="block text-xs font-medium text-ink-500 mb-1">Nome</label>
             <input
               value={nome}
               onChange={(e) => setNome(e.target.value)}
@@ -91,7 +91,7 @@ export default function ProdutoFormModal({ categorias, produto, onClose, onSaved
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-medium text-gray-500 mb-1">Preço (R$)</label>
+              <label className="block text-xs font-medium text-ink-500 mb-1">Preço (R$)</label>
               <input
                 value={preco}
                 onChange={(e) => setPreco(e.target.value)}
@@ -103,7 +103,7 @@ export default function ProdutoFormModal({ categorias, produto, onClose, onSaved
               />
             </div>
             <div>
-              <label className="block text-xs font-medium text-gray-500 mb-1">Unidade</label>
+              <label className="block text-xs font-medium text-ink-500 mb-1">Unidade</label>
               <input
                 value={unidade}
                 onChange={(e) => setUnidade(e.target.value)}
@@ -115,7 +115,7 @@ export default function ProdutoFormModal({ categorias, produto, onClose, onSaved
           </div>
 
           <div>
-            <label className="block text-xs font-medium text-gray-500 mb-1">Descrição</label>
+            <label className="block text-xs font-medium text-ink-500 mb-1">Descrição</label>
             <textarea
               value={descricao}
               onChange={(e) => setDescricao(e.target.value)}
@@ -127,7 +127,7 @@ export default function ProdutoFormModal({ categorias, produto, onClose, onSaved
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-medium text-gray-500 mb-1">Categoria</label>
+              <label className="block text-xs font-medium text-ink-500 mb-1">Categoria</label>
               <select
                 value={idCategoria}
                 onChange={(e) => setIdCategoria(e.target.value)}
@@ -142,7 +142,7 @@ export default function ProdutoFormModal({ categorias, produto, onClose, onSaved
               </select>
             </div>
             <div>
-              <label className="block text-xs font-medium text-gray-500 mb-1">Estoque</label>
+              <label className="block text-xs font-medium text-ink-500 mb-1">Estoque</label>
               <input
                 value={estoque}
                 onChange={(e) => setEstoque(e.target.value)}
@@ -156,14 +156,14 @@ export default function ProdutoFormModal({ categorias, produto, onClose, onSaved
           </div>
 
           <div>
-            <label className="block text-xs font-medium text-gray-500 mb-1">
-              Imagem {isEdit && <span className="text-gray-400">(deixe em branco para manter a atual)</span>}
+            <label className="block text-xs font-medium text-ink-500 mb-1">
+              Imagem {isEdit && <span className="text-ink-400">(deixe em branco para manter a atual)</span>}
             </label>
             <input
               type="file"
               accept="image/jpeg,image/png,image/webp,image/gif"
               onChange={(e) => setBanner(e.target.files?.[0] ?? null)}
-              className="w-full text-sm text-gray-600 file:mr-3 file:h-9 file:px-4 file:rounded-input file:border-0 file:bg-horta-medium/10 file:text-horta-dark file:text-sm file:font-medium"
+              className="w-full text-sm text-ink-600 file:mr-3 file:h-9 file:px-4 file:rounded-input file:border-0 file:bg-horta-medium/10 file:text-horta-dark file:text-sm file:font-medium"
             />
           </div>
 

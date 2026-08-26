@@ -4,9 +4,9 @@ type Tone = 'default' | 'good' | 'warning' | 'critical'
 
 const TONE_STYLES: Record<Tone, { bg: string; fg: string }> = {
   default: { bg: 'bg-horta-medium/10', fg: 'text-horta-dark' },
-  good: { bg: 'bg-[#0ca30c]/10', fg: 'text-[#0ca30c]' },
-  warning: { bg: 'bg-[#fab219]/15', fg: 'text-[#a86a00]' },
-  critical: { bg: 'bg-[#d03b3b]/10', fg: 'text-[#d03b3b]' },
+  good: { bg: 'bg-success/10', fg: 'text-success' },
+  warning: { bg: 'bg-warning/15', fg: 'text-warning-ink' },
+  critical: { bg: 'bg-brand-red/10', fg: 'text-brand-red' },
 }
 
 interface StatTileProps {
@@ -25,8 +25,8 @@ export default function StatTile({ label, value, icon: Icon, tone = 'default' }:
         <Icon className={`w-5 h-5 ${fg}`} />
       </div>
       <div>
-        <p className="text-sm text-gray-500">{label}</p>
-        <p className="text-2xl font-semibold text-gray-800 mt-0.5">{value}</p>
+        <p className="text-sm text-ink-500">{label}</p>
+        <p className="text-2xl font-semibold text-ink-800 mt-0.5">{value}</p>
       </div>
     </div>
   )

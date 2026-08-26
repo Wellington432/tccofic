@@ -71,7 +71,7 @@ export default function CarrinhoPage() {
   return (
     <AppShell title="Meu carrinho">
       {error && (
-        <div className="flex items-center gap-2 p-3 rounded-input bg-red-50 border border-red-200 text-red-600 text-sm">
+        <div className="flex items-center gap-2 p-3 rounded-input bg-brand-red/10 border border-brand-red/25 text-brand-red text-sm">
           <AlertTriangle className="w-4 h-4 shrink-0" />
           {error}
         </div>
@@ -87,8 +87,8 @@ export default function CarrinhoPage() {
 
       {!loading && cart && cart.itens.length === 0 && (
         <div className="flex flex-col items-center justify-center gap-3 py-16 text-center">
-          <ShoppingBag className="w-10 h-10 text-gray-300" />
-          <p className="text-gray-400 text-sm">Seu carrinho está vazio.</p>
+          <ShoppingBag className="w-10 h-10 text-ink-300" />
+          <p className="text-ink-400 text-sm">Seu carrinho está vazio.</p>
         </div>
       )}
 
@@ -107,8 +107,8 @@ export default function CarrinhoPage() {
                 </div>
 
                 <div className="flex-1 min-w-0">
-                  <h3 className="font-semibold text-sm text-gray-800 truncate">{item.produto.nome}</h3>
-                  <span className="text-xs text-gray-400">{item.produto.unidade}</span>
+                  <h3 className="font-semibold text-sm text-ink-800 truncate">{item.produto.nome}</h3>
+                  <span className="text-xs text-ink-400">{item.produto.unidade}</span>
                   <span className="block font-bold text-horta-dark text-sm mt-0.5">
                     {formatPrice(item.produto.preco)}
                   </span>
@@ -119,7 +119,7 @@ export default function CarrinhoPage() {
                     type="button"
                     disabled={busyItemId === item.id}
                     onClick={() => handleQuantityChange(item.id, item.quantidade - 1)}
-                    className="w-7 h-7 rounded-full border border-input-border flex items-center justify-center text-gray-500 hover:bg-bg-app disabled:opacity-50"
+                    className="w-7 h-7 rounded-full border border-input-border flex items-center justify-center text-ink-500 hover:bg-bg-app disabled:opacity-50"
                   >
                     <Minus className="w-3.5 h-3.5" />
                   </button>
@@ -130,7 +130,7 @@ export default function CarrinhoPage() {
                     type="button"
                     disabled={busyItemId === item.id}
                     onClick={() => handleQuantityChange(item.id, item.quantidade + 1)}
-                    className="w-7 h-7 rounded-full border border-input-border flex items-center justify-center text-gray-500 hover:bg-bg-app disabled:opacity-50"
+                    className="w-7 h-7 rounded-full border border-input-border flex items-center justify-center text-ink-500 hover:bg-bg-app disabled:opacity-50"
                   >
                     <Plus className="w-3.5 h-3.5" />
                   </button>
@@ -140,7 +140,7 @@ export default function CarrinhoPage() {
                   type="button"
                   disabled={busyItemId === item.id}
                   onClick={() => handleRemove(item.id)}
-                  className="w-8 h-8 shrink-0 rounded-full flex items-center justify-center text-brand-red hover:bg-red-50 disabled:opacity-50"
+                  className="w-8 h-8 shrink-0 rounded-full flex items-center justify-center text-brand-red hover:bg-brand-red/10 disabled:opacity-50"
                   aria-label="Remover item"
                 >
                   <Trash2 className="w-4 h-4" />
@@ -150,7 +150,7 @@ export default function CarrinhoPage() {
           </div>
 
           <div className="bg-white rounded-card border border-card-border shadow-card p-5 space-y-4">
-            <h3 className="font-semibold text-gray-800">Entrega</h3>
+            <h3 className="font-semibold text-ink-800">Entrega</h3>
 
             <div className="flex gap-2">
               {(['RETIRADA', 'ENTREGA'] as TipoEntrega[]).map((tipo) => (
@@ -161,7 +161,7 @@ export default function CarrinhoPage() {
                   className={`flex-1 h-10 rounded-input text-sm font-medium border transition-colors ${
                     tipoEntrega === tipo
                       ? 'bg-horta-dark text-white border-horta-dark'
-                      : 'border-input-border text-gray-600 hover:bg-bg-app'
+                      : 'border-input-border text-ink-600 hover:bg-bg-app'
                   }`}
                 >
                   {tipo === 'RETIRADA' ? 'Retirada' : 'Entrega'}
@@ -179,7 +179,7 @@ export default function CarrinhoPage() {
             )}
 
             <div className="flex items-center justify-between pt-2 border-t border-card-border">
-              <span className="text-sm text-gray-500">Total</span>
+              <span className="text-sm text-ink-500">Total</span>
               <span className="font-bold text-lg text-horta-dark">{formatPrice(total)}</span>
             </div>
 

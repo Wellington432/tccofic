@@ -33,7 +33,7 @@ function AdminShellContent({ children, title }: { children: ReactNode; title: st
                 key={href}
                 href={href}
                 className={`flex items-center gap-3 px-4 py-3 rounded-input text-sm font-medium whitespace-nowrap transition-colors ${
-                  active ? 'bg-horta-medium/10 text-horta-dark' : 'text-gray-500 hover:bg-bg-app'
+                  active ? 'bg-horta-medium/10 text-horta-dark' : 'text-ink-500 hover:bg-bg-app'
                 }`}
               >
                 <Icon className="w-[18px] h-[18px]" />
@@ -46,7 +46,7 @@ function AdminShellContent({ children, title }: { children: ReactNode; title: st
         <div className="hidden lg:flex flex-col gap-1 pt-4 border-t border-card-border">
           <Link
             href="/"
-            className="flex items-center gap-3 px-4 py-3 rounded-input text-sm font-medium text-gray-500 hover:bg-bg-app transition-colors"
+            className="flex items-center gap-3 px-4 py-3 rounded-input text-sm font-medium text-ink-500 hover:bg-bg-app transition-colors"
           >
             <ArrowLeft className="w-[18px] h-[18px]" />
             Voltar à loja
@@ -54,7 +54,7 @@ function AdminShellContent({ children, title }: { children: ReactNode; title: st
           <button
             type="button"
             onClick={signOut}
-            className="flex items-center gap-3 px-4 py-3 rounded-input text-sm font-medium text-brand-red hover:bg-red-50 transition-colors"
+            className="flex items-center gap-3 px-4 py-3 rounded-input text-sm font-medium text-brand-red hover:bg-brand-red/10 transition-colors"
           >
             <LogOut className="w-[18px] h-[18px]" />
             Sair

@@ -1,5 +1,6 @@
 import Link from 'next/link'
-import { ArrowLeft } from 'lucide-react'
+import { ArrowLeft, FileText } from 'lucide-react'
+import StaticPageHero from '@/components/StaticPageHero'
 
 export default function TermosPage() {
   return (
@@ -9,13 +10,15 @@ export default function TermosPage() {
           <ArrowLeft className="w-4 h-4" />
           Voltar
         </Link>
-        <h1 className="text-2xl font-bold text-horta-dark mb-4">Termos de Uso</h1>
-        <p className="text-gray-600 leading-relaxed">
-          Ao usar o FeiraEtec você concorda em fornecer informações verdadeiras no
-          cadastro, utilizar a plataforma apenas para compras legítimas de produtos
-          da Unidade Rural da ETEC Jales e respeitar as políticas de pagamento e
-          entrega descritas no momento da compra.
-        </p>
+
+        <StaticPageHero icon={FileText} title="Termos de Uso">
+          <p className="text-ink-600 leading-relaxed">
+            Ao usar o FeiraEtec você concorda em fornecer informações verdadeiras no
+            cadastro, utilizar a plataforma apenas para compras legítimas de produtos
+            da Unidade Rural da ETEC Jales e respeitar as políticas de pagamento e
+            entrega descritas no momento da compra.
+          </p>
+        </StaticPageHero>
       </div>
     </div>
   )

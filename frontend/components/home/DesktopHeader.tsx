@@ -45,7 +45,7 @@ export default function DesktopHeader({ search, onSearchChange }: DesktopHeaderP
           className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-bg-app transition-colors"
           aria-label="Notificações"
         >
-          <Bell className="w-5 h-5 text-gray-500" />
+          <Bell className="w-5 h-5 text-ink-500" />
         </button>
 
         <Link
@@ -53,7 +53,7 @@ export default function DesktopHeader({ search, onSearchChange }: DesktopHeaderP
           className="relative w-10 h-10 flex items-center justify-center rounded-full hover:bg-bg-app transition-colors"
           aria-label="Carrinho"
         >
-          <ShoppingCart className="w-5 h-5 text-gray-500" />
+          <ShoppingCart className="w-5 h-5 text-ink-500" />
           {itemCount > 0 && (
             <span className="absolute -top-0.5 -right-0.5 min-w-[18px] h-[18px] px-1 rounded-full bg-brand-red text-white text-[10px] font-bold flex items-center justify-center">
               {itemCount}
@@ -70,15 +70,15 @@ export default function DesktopHeader({ search, onSearchChange }: DesktopHeaderP
             <div className="w-9 h-9 rounded-full bg-horta-dark text-white flex items-center justify-center font-semibold text-sm">
               {user?.nome?.charAt(0).toUpperCase() ?? '?'}
             </div>
-            <span className="text-sm font-medium text-gray-700">Olá, {user?.nome?.split(' ')[0] ?? 'Cliente'}!</span>
-            <ChevronDown className={`w-4 h-4 text-gray-400 transition-transform ${menuOpen ? 'rotate-180' : ''}`} />
+            <span className="text-sm font-medium text-ink-700">Olá, {user?.nome?.split(' ')[0] ?? 'Cliente'}!</span>
+            <ChevronDown className={`w-4 h-4 text-ink-400 transition-transform ${menuOpen ? 'rotate-180' : ''}`} />
           </button>
 
           {menuOpen && (
-            <div className="absolute right-0 top-full mt-2 w-48 bg-white rounded-card border border-card-border shadow-card py-2 overflow-hidden">
+            <div className="absolute right-0 top-full mt-2 w-48 bg-white rounded-card-lg border border-card-border shadow-card-lg py-2 overflow-hidden animate-rise-in">
               <Link
                 href="/perfil"
-                className="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-700 hover:bg-bg-app transition-colors"
+                className="flex items-center gap-2 px-4 py-2.5 text-sm text-ink-700 hover:bg-bg-app transition-colors"
                 onClick={() => setMenuOpen(false)}
               >
                 <UserCircle className="w-4 h-4" />
@@ -87,7 +87,7 @@ export default function DesktopHeader({ search, onSearchChange }: DesktopHeaderP
               {user?.tipo === 'ADM' && (
                 <Link
                   href="/admin"
-                  className="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-700 hover:bg-bg-app transition-colors"
+                  className="flex items-center gap-2 px-4 py-2.5 text-sm text-ink-700 hover:bg-bg-app transition-colors"
                   onClick={() => setMenuOpen(false)}
                 >
                   <LayoutDashboard className="w-4 h-4" />
@@ -97,7 +97,7 @@ export default function DesktopHeader({ search, onSearchChange }: DesktopHeaderP
               <button
                 type="button"
                 onClick={signOut}
-                className="w-full flex items-center gap-2 px-4 py-2.5 text-sm text-brand-red hover:bg-red-50 transition-colors"
+                className="w-full flex items-center gap-2 px-4 py-2.5 text-sm text-brand-red hover:bg-brand-red/10 transition-colors"
               >
                 <LogOut className="w-4 h-4" />
                 Sair

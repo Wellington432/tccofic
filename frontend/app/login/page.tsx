@@ -44,14 +44,14 @@ export default function LoginPage() {
           <Logo variant="full" className="mb-8" />
 
           <h1 className="text-[28px] font-bold text-horta-dark text-center">Bem-vindo(a)!</h1>
-          <p className="text-gray-500 text-sm text-center mt-2 leading-relaxed">
+          <p className="text-ink-500 text-sm text-center mt-2 leading-relaxed">
             Entre para acessar produtos frescos direto da nossa
             <br />
             unidade rural.
           </p>
 
           {erro && (
-            <div className="mt-5 p-3 rounded-input bg-red-50 border border-red-200 text-red-600 text-sm text-center">
+            <div className="mt-5 p-3 rounded-input bg-brand-red/10 border border-brand-red/25 text-brand-red text-sm text-center">
               {erro}
             </div>
           )}
@@ -79,7 +79,7 @@ export default function LoginPage() {
                 <button
                   type="button"
                   onClick={() => setShowSenha((v) => !v)}
-                  className="text-gray-400 hover:text-horta-medium transition-colors"
+                  className="text-ink-400 hover:text-horta-medium transition-colors"
                   aria-label={showSenha ? 'Ocultar senha' : 'Mostrar senha'}
                 >
                   {showSenha ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
@@ -105,7 +105,7 @@ export default function LoginPage() {
             onClick={() => setErro('Login com Google ainda não está disponível.')}
           />
 
-          <p className="text-center text-sm text-gray-500 mt-6">
+          <p className="text-center text-sm text-ink-500 mt-6">
             Ainda não tem uma conta?{' '}
             <Link href="/cadastro" className="text-horta-dark font-semibold hover:underline">
               Cadastre-se

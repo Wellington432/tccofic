@@ -9,7 +9,7 @@ export default function EsqueciSenhaPage() {
         <Logo variant="full" className="mb-8" />
         <Mail className="w-10 h-10 text-horta-medium mx-auto mb-4" />
         <h1 className="text-2xl font-bold text-horta-dark">Recuperação de senha</h1>
-        <p className="text-gray-500 text-sm mt-3 leading-relaxed">
+        <p className="text-ink-500 text-sm mt-3 leading-relaxed">
           Essa funcionalidade ainda não está disponível. Entre em contato com a
           administração da unidade rural para redefinir sua senha.
         </p>

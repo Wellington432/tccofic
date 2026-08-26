@@ -25,14 +25,18 @@ const BENEFITS = [
 
 export default function BenefitsBar() {
   return (
-    <section className="bg-gray-50 rounded-card p-5 sm:p-6 grid grid-cols-2 lg:grid-cols-4 gap-6">
-      {BENEFITS.map(({ icon: Icon, title, desc }) => (
-        <div key={title} className="flex flex-col items-start gap-2">
+    <section className="bg-ink-50 rounded-card p-5 sm:p-6 grid grid-cols-2 lg:grid-cols-4 gap-6">
+      {BENEFITS.map(({ icon: Icon, title, desc }, i) => (
+        <div
+          key={title}
+          className="flex flex-col items-start gap-2 animate-rise-in"
+          style={{ animationDelay: `${i * 50}ms` }}
+        >
           <div className="w-10 h-10 rounded-full bg-horta-medium/10 flex items-center justify-center">
             <Icon className="w-5 h-5 text-horta-medium" />
           </div>
-          <h3 className="font-semibold text-sm text-gray-800">{title}</h3>
-          <p className="text-xs text-gray-500 leading-snug">{desc}</p>
+          <h3 className="font-semibold text-sm text-ink-800">{title}</h3>
+          <p className="text-xs text-ink-500 leading-snug">{desc}</p>
         </div>
       ))}
     </section>

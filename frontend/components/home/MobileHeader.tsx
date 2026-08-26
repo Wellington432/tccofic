@@ -16,7 +16,7 @@ export default function MobileHeader({ search, onSearchChange }: MobileHeaderPro
   const { itemCount } = useCart()
 
   return (
-    <header className="lg:hidden bg-horta-dark rounded-b-3xl px-5 pt-6 pb-5">
+    <header className="lg:hidden bg-horta-dark rounded-b-card-lg px-5 pt-6 pb-5">
       <div className="flex items-start justify-between">
         <div>
           <h1 className="text-white font-bold text-lg">Olá, {user?.nome?.split(' ')[0] ?? 'Cliente'}!</h1>

@@ -30,8 +30,8 @@ export default function BottomTabBar() {
             href={href}
             className="flex flex-col items-center justify-center gap-1 flex-1 h-full"
           >
-            <Icon className={`w-5 h-5 ${active ? 'text-horta-dark' : 'text-gray-400'}`} />
-            <span className={`text-[11px] font-medium ${active ? 'text-horta-dark' : 'text-gray-400'}`}>
+            <Icon className={`w-5 h-5 ${active ? 'text-horta-dark' : 'text-ink-400'}`} />
+            <span className={`text-[11px] font-medium ${active ? 'text-horta-dark' : 'text-ink-400'}`}>
               {label}
             </span>
           </Link>

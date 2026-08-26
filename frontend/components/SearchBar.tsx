@@ -13,13 +13,13 @@ export default function SearchBar({ value, onChange, className = '' }: SearchBar
     <div
       className={`flex items-center h-12 rounded-full bg-white border border-input-border pl-4 pr-2 gap-2 ${className}`}
     >
-      <Search className="w-4 h-4 text-gray-400 shrink-0" />
+      <Search className="w-4 h-4 text-ink-400 shrink-0" />
       <input
         value={value}
         onChange={(e) => onChange(e.target.value)}
         type="text"
         placeholder="Buscar produtos..."
-        className="flex-1 min-w-0 h-full bg-transparent outline-none text-sm text-gray-700 placeholder:text-gray-400"
+        className="flex-1 min-w-0 h-full bg-transparent outline-none text-sm text-ink-700 placeholder:text-ink-400"
       />
       <div className="h-6 w-px bg-input-border shrink-0" />
       <button

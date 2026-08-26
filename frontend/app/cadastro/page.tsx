@@ -71,12 +71,12 @@ export default function CadastroPage() {
           <Logo variant="full" className="mb-8" />
 
           <h1 className="text-[28px] font-bold text-horta-dark text-center">Criar conta</h1>
-          <p className="text-gray-500 text-sm text-center mt-2">
+          <p className="text-ink-500 text-sm text-center mt-2">
             Preencha seus dados para se cadastrar.
           </p>
 
           {erro && (
-            <div className="mt-5 p-3 rounded-input bg-red-50 border border-red-200 text-red-600 text-sm text-center">
+            <div className="mt-5 p-3 rounded-input bg-brand-red/10 border border-brand-red/25 text-brand-red text-sm text-center">
               {erro}
             </div>
           )}
@@ -115,7 +115,7 @@ export default function CadastroPage() {
                 <button
                   type="button"
                   onClick={() => setShowSenha((v) => !v)}
-                  className="text-gray-400 hover:text-horta-medium transition-colors"
+                  className="text-ink-400 hover:text-horta-medium transition-colors"
                   aria-label={showSenha ? 'Ocultar senha' : 'Mostrar senha'}
                 >
                   {showSenha ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
@@ -136,7 +136,7 @@ export default function CadastroPage() {
                 <button
                   type="button"
                   onClick={() => setShowConfirmarSenha((v) => !v)}
-                  className="text-gray-400 hover:text-horta-medium transition-colors"
+                  className="text-ink-400 hover:text-horta-medium transition-colors"
                   aria-label={showConfirmarSenha ? 'Ocultar senha' : 'Mostrar senha'}
                 >
                   {showConfirmarSenha ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
@@ -151,7 +151,7 @@ export default function CadastroPage() {
                 onChange={(e) => setAceitouTermos(e.target.checked)}
                 className="mt-0.5 w-5 h-5 shrink-0 rounded border-2 border-horta-medium text-horta-dark focus:ring-horta-medium/30 accent-[#14532D]"
               />
-              <span className="text-sm text-gray-600 leading-snug">
+              <span className="text-sm text-ink-600 leading-snug">
                 Aceito os{' '}
                 <Link href="/termos" className="text-horta-dark font-medium hover:underline">
                   Termos de Uso
@@ -175,7 +175,7 @@ export default function CadastroPage() {
             onClick={() => setErro('Cadastro com Google ainda não está disponível.')}
           />
 
-          <p className="text-center text-sm text-gray-500 mt-6">
+          <p className="text-center text-sm text-ink-500 mt-6">
             Já tem uma conta?{' '}
             <Link href="/login" className="text-horta-dark font-semibold hover:underline">
               Entrar

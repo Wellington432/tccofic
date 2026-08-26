@@ -28,7 +28,7 @@ export default function GoogleButton({ label, onClick }: { label: string; onClic
     <button
       type="button"
       onClick={onClick}
-      className="w-full h-14 rounded-input border border-input-border bg-white text-gray-700 font-medium text-[15px] flex items-center justify-center gap-3 hover:bg-gray-50 active:scale-[0.99] transition-all"
+      className="w-full h-14 rounded-input border border-input-border bg-white text-ink-700 font-medium text-[15px] flex items-center justify-center gap-3 hover:bg-ink-50 active:scale-[0.99] transition-all"
     >
      
       <GoogleIcon />

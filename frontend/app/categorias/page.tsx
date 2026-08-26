@@ -50,7 +50,7 @@ export default function CategoriasPage() {
   return (
     <AppShell title="Categorias">
       {error && (
-        <div className="flex items-center gap-2 p-3 rounded-input bg-red-50 border border-red-200 text-red-600 text-sm">
+        <div className="flex items-center gap-2 p-3 rounded-input bg-brand-red/10 border border-brand-red/25 text-brand-red text-sm">
           <AlertTriangle className="w-4 h-4 shrink-0" />
           {error}
         </div>
@@ -64,7 +64,7 @@ export default function CategoriasPage() {
       />
 
       <section>
-        <h2 className="font-bold text-lg text-gray-800 mb-4">
+        <h2 className="font-bold text-lg text-ink-800 mb-4">
           {categoriaAtiva
             ? categorias.find((c) => c.id === categoriaAtiva)?.nome ?? 'Produtos'
             : 'Todos os produtos'}
@@ -74,7 +74,7 @@ export default function CategoriasPage() {
           {produtosLoading && [...Array(5)].map((_, i) => <ProductCardSkeleton key={i} />)}
 
           {!produtosLoading && produtos.length === 0 && (
-            <p className="col-span-full text-sm text-gray-400">Nenhum produto encontrado.</p>
+            <p className="col-span-full text-sm text-ink-400">Nenhum produto encontrado.</p>
           )}
 
           {!produtosLoading && produtos.map((produto) => <ProductCard key={produto.id} produto={produto} />)}

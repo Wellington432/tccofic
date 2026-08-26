@@ -55,14 +55,14 @@ function AdminDashboardContent() {
   return (
     <AdminShell title="Dashboard">
       {error && (
-        <div className="flex items-center gap-2 p-3 rounded-input bg-red-50 border border-red-200 text-red-600 text-sm">
+        <div className="flex items-center gap-2 p-3 rounded-input bg-brand-red/10 border border-brand-red/25 text-brand-red text-sm">
           <AlertTriangle className="w-4 h-4 shrink-0" />
           {error}
         </div>
       )}
 
       <div className="flex items-center gap-2">
-        <span className="text-sm text-gray-500 mr-1">Período:</span>
+        <span className="text-sm text-ink-500 mr-1">Período:</span>
         {PERIODOS.map((p) => (
           <button
             key={p}
@@ -71,7 +71,7 @@ function AdminDashboardContent() {
             className={`h-9 px-4 rounded-input text-sm font-medium border transition-colors ${
               periodo === p
                 ? 'bg-horta-dark text-white border-horta-dark'
-                : 'border-input-border text-gray-600 hover:bg-bg-app'
+                : 'border-input-border text-ink-600 hover:bg-bg-app'
             }`}
           >
             {p} dias
@@ -139,8 +139,8 @@ function AdminDashboardContent() {
 
       {!loading && produtos.length === 0 && !error && (
         <div className="flex flex-col items-center justify-center gap-3 py-10 text-center">
-          <Boxes className="w-10 h-10 text-gray-300" />
-          <p className="text-gray-400 text-sm">Cadastre produtos para ver os gráficos de estoque.</p>
+          <Boxes className="w-10 h-10 text-ink-300" />
+          <p className="text-ink-400 text-sm">Cadastre produtos para ver os gráficos de estoque.</p>
         </div>
       )}
     </AdminShell>
