@@ -56,7 +56,7 @@ export default function AdminCategoriasPage() {
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className="bg-white rounded-card border border-card-border shadow-card p-5 flex items-end gap-3 max-w-lg">
+      <form onSubmit={handleSubmit} className="bg-white rounded-card border border-card-border shadow-card p-5 flex flex-col sm:flex-row sm:items-end gap-3 max-w-lg">
         <div className="flex-1">
           <label className="block text-xs font-medium text-ink-500 mb-1">Nova categoria</label>
           <input
@@ -67,7 +67,7 @@ export default function AdminCategoriasPage() {
             className="w-full h-11 rounded-input border border-input-border px-3.5 text-sm outline-none focus:border-horta-medium"
           />
         </div>
-        <PrimaryButton type="submit" loading={saving} className="w-auto px-5 h-11">
+        <PrimaryButton type="submit" loading={saving} className="w-full sm:w-auto px-5 h-11">
           <Plus className="w-4 h-4" />
           Adicionar
         </PrimaryButton>

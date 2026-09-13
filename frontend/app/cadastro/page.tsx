@@ -10,11 +10,11 @@ import Logo from '@/components/Logo'
 import FormInput from '@/components/FormInput'
 import PrimaryButton from '@/components/PrimaryButton'
 import OrDivider from '@/components/OrDivider'
-import GoogleButton from '@/components/GoogleButton'
+import GoogleSignInButton from '@/components/GoogleSignInButton'
 import LeafWatermark from '@/components/LeafWatermark'
 
 export default function CadastroPage() {
-  const { signUp } = useAuth()
+  const { signUp, signInWithGoogle } = useAuth()
   const router = useRouter()
 
   const [nome, setNome] = useState('')
@@ -48,6 +48,16 @@ export default function CadastroPage() {
       setErro(getApiErrorMessage(err, 'Não foi possível criar sua conta.'))
     } finally {
       setLoading(false)
+    }
+  }
+
+  async function handleGoogleSuccess(credential: string) {
+    setErro('')
+    try {
+      await signInWithGoogle(credential)
+      router.push('/')
+    } catch (err) {
+      setErro(getApiErrorMessage(err, 'Não foi possível cadastrar com o Google.'))
     }
   }
 
@@ -170,9 +180,10 @@ export default function CadastroPage() {
 
           <OrDivider />
 
-          <GoogleButton
+          <GoogleSignInButton
             label="Cadastrar com Google"
-            onClick={() => setErro('Cadastro com Google ainda não está disponível.')}
+            onSuccess={handleGoogleSuccess}
+            onError={() => setErro('Não foi possível cadastrar com o Google.')}
           />
 
           <p className="text-center text-sm text-ink-500 mt-6">

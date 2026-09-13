@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import { Check, CheckCircle2, Loader2, XCircle } from 'lucide-react';
+import { toast } from 'react-toastify';
 import { getStoredAuth } from '@/lib/api';
 import PrimaryButton from '@/components/PrimaryButton';
 
@@ -49,7 +50,7 @@ export default function PagamentoPage() {
       setPix(data);
     } catch (err) {
       console.error(err);
-      alert('Erro ao carregar dados do Pix');
+      toast.error('Erro ao carregar dados do Pix');
     } finally {
       setCarregando(false);
     }
@@ -82,7 +83,7 @@ export default function PagamentoPage() {
 
       setStatus('AGUARDANDO_CONFIRMACAO');
     } catch (err) {
-      alert((err as Error).message);
+      toast.error((err as Error).message);
     } finally {
       setEnviando(false);
     }

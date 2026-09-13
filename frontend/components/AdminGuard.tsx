@@ -3,7 +3,7 @@
 import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { useAuth } from '@/contexts/AuthContext'
-import { Leaf } from 'lucide-react'
+import Logo from '@/components/Logo'
 
 export default function AdminGuard({ children }: { children: React.ReactNode }) {
   const { user, isAuthenticated, isHydrated } = useAuth()
@@ -23,7 +23,7 @@ export default function AdminGuard({ children }: { children: React.ReactNode }) 
   if (!isHydrated || !isAuthenticated || user?.tipo !== 'ADM') {
     return (
       <div className="min-h-screen flex items-center justify-center bg-bg-app">
-        <Leaf className="w-8 h-8 text-horta-dark animate-pulse" />
+        <Logo variant="compact" className="animate-pulse" />
       </div>
     )
   }

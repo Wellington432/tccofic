@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, FormEvent } from 'react'
+import { useState, FormEvent, useEffect } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { Mail, Lock, Eye, EyeOff } from 'lucide-react'
@@ -10,11 +10,11 @@ import Logo from '@/components/Logo'
 import FormInput from '@/components/FormInput'
 import PrimaryButton from '@/components/PrimaryButton'
 import OrDivider from '@/components/OrDivider'
-import GoogleButton from '@/components/GoogleButton'
+import GoogleSignInButton from '@/components/GoogleSignInButton'
 import DecorativeStrip from '@/components/DecorativeStrip'
 
 export default function LoginPage() {
-  const { signIn } = useAuth()
+  const { signIn, signInWithGoogle } = useAuth()
   const router = useRouter()
 
   const [email, setEmail] = useState('')
@@ -22,6 +22,12 @@ export default function LoginPage() {
   const [showSenha, setShowSenha] = useState(false)
   const [erro, setErro] = useState('')
   const [loading, setLoading] = useState(false)
+
+  useEffect(() => {
+    if (new URLSearchParams(window.location.search).get('sessao_expirada') === '1') {
+      setErro('Sua sessão expirou. Faça login novamente.')
+    }
+  }, [])
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault()
@@ -34,6 +40,16 @@ export default function LoginPage() {
       setErro(getApiErrorMessage(err, 'Não foi possível entrar. Verifique seus dados.'))
     } finally {
       setLoading(false)
+    }
+  }
+
+  async function handleGoogleSuccess(credential: string) {
+    setErro('')
+    try {
+      await signInWithGoogle(credential)
+      router.push('/')
+    } catch (err) {
+      setErro(getApiErrorMessage(err, 'Não foi possível entrar com o Google.'))
     }
   }
 
@@ -100,9 +116,10 @@ export default function LoginPage() {
 
           <OrDivider />
 
-          <GoogleButton
+          <GoogleSignInButton
             label="Entrar com Google"
-            onClick={() => setErro('Login com Google ainda não está disponível.')}
+            onSuccess={handleGoogleSuccess}
+            onError={() => setErro('Não foi possível entrar com o Google.')}
           />
 
           <p className="text-center text-sm text-ink-500 mt-6">

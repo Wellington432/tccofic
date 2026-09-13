@@ -9,6 +9,7 @@ interface AuthContextData {
   isHydrated: boolean
   signIn: (email: string, senha: string) => Promise<void>
   signUp: (nome: string, email: string, senha: string) => Promise<void>
+  signInWithGoogle: (credential: string) => Promise<void>
   signOut: () => void
 }
 
@@ -34,6 +35,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     await signIn(email, senha)
   }
 
+  async function signInWithGoogle(credential: string) {
+    const { data } = await api.post<StoredAuth>('/sessao/google', { credential })
+    setStoredAuth(data)
+    setUser(data)
+  }
+
   function signOut() {
     clearStoredAuth()
     setUser(null)
@@ -41,7 +48,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   return (
     <AuthContext.Provider
-      value={{ user, isAuthenticated: !!user, isHydrated, signIn, signUp, signOut }}
+      value={{ user, isAuthenticated: !!user, isHydrated, signIn, signUp, signInWithGoogle, signOut }}
     >
       {children}
     </AuthContext.Provider>

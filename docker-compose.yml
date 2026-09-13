@@ -55,6 +55,7 @@ services:
       MP_WEBHOOK_SECRET: ${MP_WEBHOOK_SECRET}
       API_URL: ${API_URL}
       FRONTEND_URL: ${FRONTEND_URL}
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID}
     ports:
       - "3333:3333"     # ÚNICO serviço exposto pro mundo
     networks:

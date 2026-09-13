@@ -31,6 +31,7 @@ export interface Produto {
   descricao: string
   banner: string
   estoque: number
+  ativo: boolean
   id_categoria?: string
   categoria?: Categoria
 }

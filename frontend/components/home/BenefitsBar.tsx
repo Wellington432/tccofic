@@ -25,11 +25,11 @@ const BENEFITS = [
 
 export default function BenefitsBar() {
   return (
-    <section className="bg-ink-50 rounded-card p-5 sm:p-6 grid grid-cols-2 lg:grid-cols-4 gap-6">
+    <section className="bg-ink-50 rounded-card p-6 sm:p-8 lg:p-10 grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10">
       {BENEFITS.map(({ icon: Icon, title, desc }, i) => (
         <div
           key={title}
-          className="flex flex-col items-start gap-2 animate-rise-in"
+          className="flex flex-col items-start gap-2.5 animate-rise-in"
           style={{ animationDelay: `${i * 50}ms` }}
         >
           <div className="w-10 h-10 rounded-full bg-horta-medium/10 flex items-center justify-center">

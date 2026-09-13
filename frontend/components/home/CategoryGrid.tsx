@@ -1,16 +1,16 @@
 'use client'
 
 import Link from 'next/link'
-import { Salad, Apple, Leaf, Egg, Package, LucideIcon } from 'lucide-react'
+import Image from 'next/image'
 import { Categoria } from '@/lib/types'
 
-function iconForCategoria(nome: string): LucideIcon {
+function imageForCategoria(nome: string): string {
   const n = nome.toLowerCase()
-  if (n.includes('hortal') || n.includes('verdura') || n.includes('folha')) return Salad
-  if (n.includes('fruta')) return Apple
-  if (n.includes('tempero') || n.includes('erva')) return Leaf
-  if (n.includes('ovo')) return Egg
-  return Package
+  if (n.includes('hortal') || n.includes('verdura') || n.includes('folha')) return '/produce/icon-folha.png'
+  if (n.includes('fruta')) return '/produce/icon-fruta.png'
+  if (n.includes('tempero') || n.includes('erva') || n.includes('grão') || n.includes('grao')) return '/produce/icon-graos.png'
+  if (n.includes('ovo')) return '/produce/icon-ovos.png'
+  return '/produce/icon-caixa.png'
 }
 
 interface CategoryGridProps {
@@ -32,14 +32,14 @@ function CardSkeleton() {
 export default function CategoryGrid({ categorias, loading, activeId, onSelect }: CategoryGridProps) {
   return (
     <section>
-      <div className="flex items-center justify-between mb-4">
+      <div className="flex items-center justify-between mb-5 lg:mb-6">
         <h2 className="font-bold text-lg text-ink-800">Categorias</h2>
         <Link href="/categorias" className="text-horta-dark text-sm font-medium hover:underline">
           Ver todas
         </Link>
       </div>
 
-      <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4">
+      <div className="grid grid-cols-[repeat(auto-fit,minmax(96px,140px))] sm:grid-cols-[repeat(auto-fit,minmax(120px,170px))] gap-3 sm:gap-4">
         {loading &&
           [...Array(5)].map((_, i) => <CardSkeleton key={i} />)}
 
@@ -49,7 +49,7 @@ export default function CategoryGrid({ categorias, loading, activeId, onSelect }
 
         {!loading &&
           categorias.slice(0, 5).map((categoria) => {
-            const Icon = iconForCategoria(categoria.nome)
+            const iconSrc = imageForCategoria(categoria.nome)
             const active = activeId === categoria.id
             return (
               <button
@@ -60,11 +60,11 @@ export default function CategoryGrid({ categorias, loading, activeId, onSelect }
                 style={{ animationDelay: `${categorias.indexOf(categoria) * 50}ms` }}
               >
                 <div
-                  className={`w-full aspect-square rounded-card bg-white border flex items-center justify-center shadow-card transition-colors ${
+                  className={`w-full aspect-square rounded-card bg-white border flex items-center justify-center shadow-card transition-colors p-3 ${
                     active ? 'border-horta-medium' : 'border-card-border'
                   }`}
                 >
-                  <Icon className={`w-7 h-7 ${active ? 'text-horta-dark' : 'text-horta-medium'}`} />
+                  <Image src={iconSrc} alt="" width={40} height={40} className="w-full h-full object-contain" />
                 </div>
                 <span
                   className={`text-xs font-medium text-center leading-tight ${

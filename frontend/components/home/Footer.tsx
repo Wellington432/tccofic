@@ -2,7 +2,7 @@ import { Instagram, Facebook, MessageCircle } from 'lucide-react'
 
 export default function Footer() {
   return (
-    <footer className="hidden lg:flex bg-horta-dark rounded-card mt-8 px-8 py-6 items-center justify-between">
+    <footer className="flex flex-col lg:flex-row bg-horta-dark rounded-card px-6 sm:px-8 py-8 lg:py-10 items-center justify-center lg:justify-between gap-4 text-center lg:text-left">
       <div>
         <p className="text-white font-semibold text-sm">
           Feira Etec - Produtos da Unidade Rural - ETEC Jales

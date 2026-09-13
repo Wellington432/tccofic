@@ -70,7 +70,7 @@ export default function CategoriasPage() {
             : 'Todos os produtos'}
         </h2>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+        <div className="grid grid-cols-[repeat(auto-fit,minmax(130px,190px))] sm:grid-cols-[repeat(auto-fit,minmax(150px,220px))] gap-4">
           {produtosLoading && [...Array(5)].map((_, i) => <ProductCardSkeleton key={i} />)}
 
           {!produtosLoading && produtos.length === 0 && (

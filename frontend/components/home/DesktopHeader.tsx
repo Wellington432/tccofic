@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, ReactNode } from 'react'
 import Link from 'next/link'
 import { Bell, ShoppingCart, ChevronDown, LogOut, UserCircle, LayoutDashboard } from 'lucide-react'
 import Logo from '@/components/Logo'
@@ -11,9 +11,20 @@ import { useCart } from '@/contexts/CartContext'
 interface DesktopHeaderProps {
   search: string
   onSearchChange: (v: string) => void
+  onFilterClick?: () => void
+  filterActive?: boolean
+  hasActiveFilters?: boolean
+  filterPanel?: ReactNode
 }
 
-export default function DesktopHeader({ search, onSearchChange }: DesktopHeaderProps) {
+export default function DesktopHeader({
+  search,
+  onSearchChange,
+  onFilterClick,
+  filterActive,
+  hasActiveFilters,
+  filterPanel,
+}: DesktopHeaderProps) {
   const { user, signOut } = useAuth()
   const { itemCount } = useCart()
   const [menuOpen, setMenuOpen] = useState(false)
@@ -31,15 +42,25 @@ export default function DesktopHeader({ search, onSearchChange }: DesktopHeaderP
 
   return (
     <header className="hidden lg:flex sticky top-0 z-30 h-20 bg-white border-b border-card-border items-center px-8 gap-8">
-      <Link href="/">
+      <Link href="/" className="shrink-0">
         <Logo variant="compact" />
       </Link>
 
-      <div className="flex-1 max-w-xl">
-        <SearchBar value={search} onChange={onSearchChange} />
+      <div className="relative flex-1 flex justify-center min-w-0">
+        <SearchBar
+          value={search}
+          onChange={onSearchChange}
+          onFilterClick={onFilterClick}
+          filterActive={filterActive}
+          hasActiveFilters={hasActiveFilters}
+          className="w-full max-w-[480px]"
+        />
+        {filterActive && filterPanel && (
+          <div className="absolute right-0 top-full mt-2 z-40 w-80">{filterPanel}</div>
+        )}
       </div>
 
-      <div className="flex items-center gap-5 ml-auto">
+      <div className="flex items-center gap-5 shrink-0">
         <button
           type="button"
           className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-bg-app transition-colors"

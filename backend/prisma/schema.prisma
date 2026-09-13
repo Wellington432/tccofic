@@ -1,0 +1,104 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum TipoUsuario {
+  ADM
+  CLIENTE
+}
+
+enum StatusCompra {
+  CARRINHO
+  
+   AGUARDANDO_PAGAMENTO     
+  AGUARDANDO_CONFIRMACAO
+    PAGO
+  REJEITADO
+  CANCELADO
+}
+
+enum TipoEntrega {
+  RETIRADA
+  ENTREGA
+}
+
+model Usuario {
+  id            String      @id @default(uuid())
+  nome          String
+  email         String      @unique
+  senha         String?
+  googleId      String?     @unique
+  tipo          TipoUsuario @default(CLIENTE)
+  criado_em     DateTime    @default(now())
+  modificado_em DateTime    @updatedAt
+  compras       Compra[]
+
+  @@map("usuario")
+}
+
+model Categoria {
+  id            String   @id @default(uuid())
+  nome          String
+  criado_em     DateTime @default(now())
+  modificado_em DateTime @updatedAt
+  produtos      Produto[]
+
+  @@map("categoria")
+}
+
+model Produto {
+  id            String   @id @default(uuid())
+  nome          String
+  preco         Decimal  @db.Decimal(10, 2)
+  unidade       String
+  descricao     String
+  banner        String
+  estoque       Int      @default(0)
+  ativo         Boolean  @default(true)
+  criado_em     DateTime @default(now())
+  modificado_em DateTime @updatedAt
+  categoria     Categoria @relation(fields: [id_categoria], references: [id])
+  id_categoria  String
+  itens         ItemCompra[]
+
+  @@map("produto")
+}
+
+model Compra {
+  id           String       @id @default(uuid())
+  status           StatusCompra @default(CARRINHO)
+  tipo_entrega     TipoEntrega  @default(RETIRADA)
+  endereco         String?
+  forma_pagamento  String?
+  total            Decimal      @default(0) @db.Decimal(10, 2)
+  comprovante_url        String?
+  comprovante_enviado_em DateTime?
+  confirmado_por          String?  
+  confirmado_em           DateTime?
+  criado_em        DateTime     @default(now())
+  modificado_em    DateTime     @updatedAt
+  usuario          Usuario      @relation(fields: [id_usuario], references: [id])
+  id_usuario       String
+  itens            ItemCompra[]
+  
+
+  @@map("compra")
+}
+
+model ItemCompra {
+  id             String   @id @default(uuid())
+  quantidade     Int
+  preco_unitario Decimal? @db.Decimal(10, 2)
+  criado_em      DateTime @default(now())
+  compra     Compra  @relation(fields: [id_compra], references: [id])
+  id_compra  String
+  produto    Produto @relation(fields: [id_produto], references: [id])
+  id_produto String
+
+  @@map("item_compra")
+}

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
-import { AlertTriangle, Plus, Pencil, Trash2, Package } from 'lucide-react'
+import { AlertTriangle, Plus, Pencil, Trash2, Undo2, Package } from 'lucide-react'
 import AdminShell from '@/components/admin/AdminShell'
 import ProdutoFormModal from '@/components/admin/ProdutoFormModal'
 import { api, getApiErrorMessage } from '@/lib/api'
@@ -19,13 +19,14 @@ export default function AdminProdutosPage() {
   const [modalOpen, setModalOpen] = useState(false)
   const [editing, setEditing] = useState<Produto | null>(null)
   const [deletingId, setDeletingId] = useState<string | null>(null)
+  const [togglingId, setTogglingId] = useState<string | null>(null)
 
   async function carregar() {
     setLoading(true)
     setError('')
     try {
       const [produtosRes, categoriasRes] = await Promise.all([
-        api.get<Produto[]>('/listproduto'),
+        api.get<Produto[]>('/listproduto?todos=1'),
         api.get<Categoria[]>('/listcategoria'),
       ])
       setProdutos(produtosRes.data)
@@ -62,16 +63,38 @@ export default function AdminProdutosPage() {
   }
 
   async function handleDelete(id: string) {
-    if (!confirm('Excluir este produto? Essa ação não pode ser desfeita.')) return
+    if (!confirm('Desativar este produto? Ele deixa de aparecer na loja, mas o histórico de pedidos é preservado.')) return
     setDeletingId(id)
     setError('')
     try {
       await api.delete('/deletaproduto', { data: { id } })
       await carregar()
     } catch (err) {
-      setError(getApiErrorMessage(err, 'Não foi possível excluir o produto.'))
+      setError(getApiErrorMessage(err, 'Não foi possível desativar o produto.'))
     } finally {
       setDeletingId(null)
+    }
+  }
+
+  async function handleReativar(produto: Produto) {
+    setTogglingId(produto.id)
+    setError('')
+    try {
+      const formData = new FormData()
+      formData.append('id', produto.id)
+      formData.append('nome', produto.nome)
+      formData.append('preco', produto.preco)
+      formData.append('unidade', produto.unidade)
+      formData.append('descricao', produto.descricao)
+      formData.append('id_categoria', produto.id_categoria ?? produto.categoria?.id ?? '')
+      formData.append('estoque', String(produto.estoque))
+      formData.append('ativo', 'true')
+      await api.put('/atualizaproduto', formData)
+      await carregar()
+    } catch (err) {
+      setError(getApiErrorMessage(err, 'Não foi possível reativar o produto.'))
+    } finally {
+      setTogglingId(null)
     }
   }
 
@@ -120,7 +143,7 @@ export default function AdminProdutosPage() {
       {!loading && produtos.length > 0 && (
         <div className="bg-white rounded-card border border-card-border shadow-card overflow-hidden">
           <div className="overflow-x-auto">
-            <table className="w-full text-sm">
+            <table className="w-full min-w-[640px] text-sm">
               <thead>
                 <tr className="text-left text-ink-400 text-xs border-b border-card-border">
                   <th className="font-medium px-4 py-3">Produto</th>
@@ -132,7 +155,10 @@ export default function AdminProdutosPage() {
               </thead>
               <tbody>
                 {produtos.map((produto) => (
-                  <tr key={produto.id} className="border-b border-card-border last:border-0">
+                  <tr
+                    key={produto.id}
+                    className={`border-b border-card-border last:border-0 ${!produto.ativo ? 'opacity-50' : ''}`}
+                  >
                     <td className="px-4 py-3">
                       <div className="flex items-center gap-3">
                         <div className="relative w-10 h-10 rounded-input overflow-hidden bg-bg-app shrink-0">
@@ -140,8 +166,15 @@ export default function AdminProdutosPage() {
                             <Image src={produto.banner} alt={produto.nome} fill className="object-cover" />
                           )}
                         </div>
-                        <div>
-                          <p className="font-medium text-ink-800">{produto.nome}</p>
+                        <div className="min-w-0">
+                          <p className="font-medium text-ink-800 truncate max-w-[160px] sm:max-w-[240px]">
+                            {produto.nome}
+                            {!produto.ativo && (
+                              <span className="ml-2 inline-block px-1.5 py-0.5 rounded-input bg-ink-100 text-ink-500 text-[10px] font-semibold align-middle">
+                                Inativo
+                              </span>
+                            )}
+                          </p>
                           <p className="text-xs text-ink-400">{produto.unidade}</p>
                         </div>
                       </div>
@@ -169,15 +202,27 @@ export default function AdminProdutosPage() {
                         >
                           <Pencil className="w-4 h-4" />
                         </button>
-                        <button
-                          type="button"
-                          onClick={() => handleDelete(produto.id)}
-                          disabled={deletingId === produto.id}
-                          className="w-8 h-8 rounded-full flex items-center justify-center text-brand-red hover:bg-brand-red/10 transition-colors disabled:opacity-50"
-                          aria-label={`Excluir ${produto.nome}`}
-                        >
-                          <Trash2 className="w-4 h-4" />
-                        </button>
+                        {produto.ativo ? (
+                          <button
+                            type="button"
+                            onClick={() => handleDelete(produto.id)}
+                            disabled={deletingId === produto.id}
+                            className="w-8 h-8 rounded-full flex items-center justify-center text-brand-red hover:bg-brand-red/10 transition-colors disabled:opacity-50"
+                            aria-label={`Desativar ${produto.nome}`}
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </button>
+                        ) : (
+                          <button
+                            type="button"
+                            onClick={() => handleReativar(produto)}
+                            disabled={togglingId === produto.id}
+                            className="w-8 h-8 rounded-full flex items-center justify-center text-horta-dark hover:bg-horta-dark/10 transition-colors disabled:opacity-50"
+                            aria-label={`Reativar ${produto.nome}`}
+                          >
+                            <Undo2 className="w-4 h-4" />
+                          </button>
+                        )}
                       </div>
                     </td>
                   </tr>

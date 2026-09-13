@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import Image from 'next/image'
-import { AlertTriangle, Minus, Plus, Trash2, ShoppingBag, Loader2 } from 'lucide-react'
+import { AlertTriangle, Minus, Plus, Trash2, Loader2 } from 'lucide-react'
 import AppShell from '@/components/AppShell'
 import { useCart } from '@/contexts/CartContext'
 import { api, getApiErrorMessage } from '@/lib/api'
@@ -87,7 +87,7 @@ export default function CarrinhoPage() {
 
       {!loading && cart && cart.itens.length === 0 && (
         <div className="flex flex-col items-center justify-center gap-3 py-16 text-center">
-          <ShoppingBag className="w-10 h-10 text-ink-300" />
+          <Image src="/produce/tomate_folhas.png" alt="" width={370} height={269} className="w-24 h-auto opacity-70" />
           <p className="text-ink-400 text-sm">Seu carrinho está vazio.</p>
         </div>
       )}
@@ -98,7 +98,7 @@ export default function CarrinhoPage() {
             {cart.itens.map((item) => (
               <div
                 key={item.id}
-                className="bg-white rounded-card border border-card-border shadow-card p-3 flex items-center gap-4"
+                className="bg-white rounded-card border border-card-border shadow-card p-3 flex flex-wrap items-center gap-4"
               >
                 <div className="relative w-16 h-16 rounded-input overflow-hidden bg-bg-app shrink-0">
                   {item.produto.banner && (
@@ -106,7 +106,7 @@ export default function CarrinhoPage() {
                   )}
                 </div>
 
-                <div className="flex-1 min-w-0">
+                <div className="flex-1 min-w-[140px]">
                   <h3 className="font-semibold text-sm text-ink-800 truncate">{item.produto.nome}</h3>
                   <span className="text-xs text-ink-400">{item.produto.unidade}</span>
                   <span className="block font-bold text-horta-dark text-sm mt-0.5">

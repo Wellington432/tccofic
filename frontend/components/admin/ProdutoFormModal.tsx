@@ -89,7 +89,7 @@ export default function ProdutoFormModal({ categorias, produto, onClose, onSaved
             />
           </div>
 
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
               <label className="block text-xs font-medium text-ink-500 mb-1">Preço (R$)</label>
               <input
@@ -125,7 +125,7 @@ export default function ProdutoFormModal({ categorias, produto, onClose, onSaved
             />
           </div>
 
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
               <label className="block text-xs font-medium text-ink-500 mb-1">Categoria</label>
               <select

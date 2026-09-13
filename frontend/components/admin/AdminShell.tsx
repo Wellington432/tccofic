@@ -3,7 +3,7 @@
 import { ReactNode } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { LayoutDashboard, Package, FolderTree, ArrowLeft, LogOut } from 'lucide-react'
+import { LayoutDashboard, Package, FolderTree, Wallet, ArrowLeft, LogOut } from 'lucide-react'
 import AdminGuard from '@/components/AdminGuard'
 import Logo from '@/components/Logo'
 import { useAuth } from '@/contexts/AuthContext'
@@ -12,6 +12,7 @@ const NAV_ITEMS = [
   { href: '/admin', label: 'Dashboard', icon: LayoutDashboard },
   { href: '/admin/produtos', label: 'Produtos', icon: Package },
   { href: '/admin/categorias', label: 'Categorias', icon: FolderTree },
+  { href: '/admin/pagamentos', label: 'Pagamentos', icon: Wallet },
 ]
 
 function AdminShellContent({ children, title }: { children: ReactNode; title: string }) {
@@ -43,21 +44,23 @@ function AdminShellContent({ children, title }: { children: ReactNode; title: st
           })}
         </nav>
 
-        <div className="hidden lg:flex flex-col gap-1 pt-4 border-t border-card-border">
+        <div className="flex items-center justify-center gap-6 pt-3 border-t border-card-border lg:flex-col lg:items-stretch lg:justify-start lg:gap-1 lg:pt-4">
           <Link
             href="/"
+            aria-label="Voltar à loja"
             className="flex items-center gap-3 px-4 py-3 rounded-input text-sm font-medium text-ink-500 hover:bg-bg-app transition-colors"
           >
             <ArrowLeft className="w-[18px] h-[18px]" />
-            Voltar à loja
+            <span className="hidden lg:inline">Voltar à loja</span>
           </Link>
           <button
             type="button"
             onClick={signOut}
+            aria-label="Sair"
             className="flex items-center gap-3 px-4 py-3 rounded-input text-sm font-medium text-brand-red hover:bg-brand-red/10 transition-colors"
           >
             <LogOut className="w-[18px] h-[18px]" />
-            Sair
+            <span className="hidden lg:inline">Sair</span>
           </button>
         </div>
       </aside>

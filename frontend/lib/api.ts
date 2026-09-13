@@ -41,6 +41,25 @@ api.interceptors.request.use((config) => {
   return config
 })
 
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    const isAuthEndpoint = error.config?.url === '/sessao' || error.config?.url === '/sessao/google'
+    if (
+      axios.isAxiosError(error) &&
+      error.response?.status === 401 &&
+      !isAuthEndpoint &&
+      typeof window !== 'undefined'
+    ) {
+      clearStoredAuth()
+      if (window.location.pathname !== '/login') {
+        window.location.href = '/login?sessao_expirada=1'
+      }
+    }
+    return Promise.reject(error)
+  }
+)
+
 export function getApiErrorMessage(err: unknown, fallback = 'Não foi possível completar a operação.'): string {
   if (axios.isAxiosError(err)) {
     const axiosErr = err as AxiosError<{ error?: string }>
